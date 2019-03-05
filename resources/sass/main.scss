@@ -1,0 +1,26 @@
+.navbar{
+    height: 50px;
+    .nav-row{
+        flex-direction: row;
+    }
+
+    .dropdown-menu{
+        position: absolute;
+    }
+}
+
+.table th{
+    border-top: 0px solid #dee2e6;
+}
+
+.card{
+    .table td,.table th{
+        padding: 0.6rem;
+    }
+}
+
+.card{
+    .table-height{
+        max-height: 40vh;
+    }
+}
