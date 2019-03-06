@@ -10758,6 +10758,10 @@ body a:hover {
   max-height: 40vh;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
 .full-height {
   top: 0px;
   width: 100%;
