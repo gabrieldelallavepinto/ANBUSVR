@@ -14,12 +14,12 @@ class CreateParticipantsTable extends Migration
     public function up()
     {
         Schema::create('participants', function (Blueprint $table) {
-            
+
             $table->bigIncrements('id');
             $table->unsignedBigInteger('project_id');
             $table->string('name');
-            $table->smallInteger('age');
-            $table->enum('gender', ['male', 'female']);
+            $table->smallInteger('age')->nullable();
+            $table->enum('gender', ['male', 'female'])->nullable();
             $table->timestamps();
 
             $table->foreign('project_id')->references('id')->on('projects');

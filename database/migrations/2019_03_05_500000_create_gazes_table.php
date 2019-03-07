@@ -18,12 +18,11 @@ class CreateGazesTable extends Migration
             $table->unsignedBigInteger('project_id');
             $table->unsignedBigInteger('participant_id');
             $table->unsignedBigInteger('item_id');
-            $table->unsignedBigInteger('scene_id');
             $table->integer('sequence');
             $table->double('timeStart');
             $table->double('timeEnd');
             $table->timestamps();
-            
+
             $table->foreign('project_id')->references('id')->on('projects');
             $table->foreign('participant_id')->references('id')->on('participants');
             $table->foreign('item_id')->references('id')->on('items');

@@ -59,12 +59,12 @@ class ProjectController extends Controller
         }
 
         if ($validator->fails()) {
-            return redirect(route('project.create'))->withErrors($validator)->withInput();
+            return back()->withErrors($validator)->withInput();
         }
 
         $newProject = new Project($request->all());
         $newProject->save();
-        return redirect(route('project.index'));
+        return redirect()->route('project.index');
     }
 
     /**
@@ -76,7 +76,8 @@ class ProjectController extends Controller
     public function show($id)
     {
         $project = Project::find($id);
-        return $project;
+
+        return view('project.show', ['project' => $project]);
     }
 
     /**
@@ -111,7 +112,7 @@ class ProjectController extends Controller
     public function destroy($id)
     {
         Project::destroy($id);
-        return redirect()->back();
+        return redirect()->route('project.index');
     }
 
 

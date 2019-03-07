@@ -18,7 +18,6 @@ class CreateGrabbsTable extends Migration
             $table->unsignedBigInteger('project_id');
             $table->unsignedBigInteger('participant_id');
             $table->unsignedBigInteger('item_id');
-            $table->unsignedBigInteger('scene_id');
             $table->integer('sequence');
             $table->double('timeStart');
             $table->double('timeEnd');

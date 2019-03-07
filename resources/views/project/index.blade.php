@@ -24,15 +24,14 @@
 
                     @if(count($projects))
 
-                        <div class="table-height table-responsive">
+                        <div class="table-responsive">
                             <table class="table">
                                 <thead>
                                     <tr>
                                         <th scope="col">Nombre</th>
                                         <th scope="col">API ID</th>
-                                        <th scope="col">Numero de Encuestados</th>
+                                        <th scope="col">Numero de Participantes</th>
                                         <th scope="col">Numero de Objetos</th>
-                                        <th scope="col">Numero de Escenas</th>
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
@@ -43,7 +42,6 @@
                                         <td>{{$project->id}}</td>
                                         <td>{{$project->participants()->count()}}</td>
                                         <td>{{$project->items()->count()}}</td>
-                                        <td>{{$project->scenes()->count()}}</td>
                                         <td>
 
                                             <div class="d-flex float-right">

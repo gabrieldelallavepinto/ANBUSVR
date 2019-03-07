@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Gaze extends Model
 {
+
+    protected $table = 'gazes';
+
     protected $fillable = [
         'project_id','participant_id','item_id','scene_id','sequence', 'timeStart', 'timeEnd'
     ];
