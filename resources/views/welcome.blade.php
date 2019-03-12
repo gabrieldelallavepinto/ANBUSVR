@@ -1,99 +1,102 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('main')
 
-        <title>Laravel</title>
+@section('content')
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+    <header class="welcome full-height">
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+        <div class="container center">
+            <div class="row justify-content-center text-center">
 
-            .full-height {
-                height: 100vh;
-            }
+                <div class="col-md-8">
+                    <div class="home-content">
+                        <img src="images/logo/logo.svg" width="100" height="100" class="d-inline-block align-top" alt="">
+                        <h1 class="white-text">Analytics VR</h1>
+                        <p class="white-text">UNA ANALÍTICA PARA AUMENTAR LA PRODUCTIVIDAD Y EXPERIENCIA EN NUESTROS PROYECTOS</p>
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
+                        @guest
+                            <a class="btn btn-light button" href="{{ route('login') }}">{{ __('Iniciar sesión') }}</a>
+                        @else
+                            <a class="btn btn-light button" href="{{ route('project.index') }}">{{ __('Mis proyectos') }}</a>
+                        @endguest
+                    </div>
                 </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+            </div>
+        </div>
+
+    </header>
+
+    <div class="container py-5">
+
+        <div class="row py-2">
+            <div class="col-12">
+
+                <h2 class="">¿Por qué AnalyticsVR?</h2>
+
+                <div class="text-justify">
+                    <p>Gracias a los sistemas virtuales son más completos que cualquier otro dispositivo de computación creado aún, gracias a estos dispositivos podemos crear la situación que queramos y representar objetos a tamaño real.</p>
+                    <p>Esto nos permite tener una mayor cantidad de datos reales que pueden utilizarse de múltiples maneras.</p>
+
+                </div>
+
+                <div class="row justify-content-center text-center">
+                    <div class="col-md-4 py-3">
+                        <div class="card">
+                            <div class="card-body" style="min-height: 300px;">
+                                <img src="images/icons/1.png" alt="1" width="100" height="100">
+                                <h5 class="card-title">Fácil proceso de integración</h5>
+                                <div>
+                                    En unos pocos minutos puede hacer que su proyecto de realidad virtual empiece a analizar cada uno de los objetos que desee.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 py-3">
+                        <div class="card">
+                            <div class="card-body" style="min-height: 300px;">
+                                <img src="images/icons/3.png" alt="3" width="100" height="100">
+                                <h5 class="card-title">Estudio sobre sus productos</h5>
+                                <div>
+                                    Obtenga información sobre cómo los usuarios interactúan con su productos y cuales le llaman más la atención.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 py-3">
+                        <div class="card">
+                            <div class="card-body" style="min-height: 300px;">
+                                <img src="images/icons/2.png" alt="2" width="100" height="100">
+                                <h5 class="card-title">Representación Analítica</h5>
+                                <div>
+                                    Gracias a las gráficas podrá ver en todo momento el análisis de su aplicación.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="background" style="background-color: #b5a9f95e;">
+
+        <div class="container py-5">
+            <div class="row justify-content-between">
+                <div class="col-6 text-left align-self-center">
+                    <h2 class="card-title">Aplicación web</h2>
+                    <div>
+                        Sitio personal para ver la analítica de todos los objetos de sus proyectos en cualquier lugar y en cualquier momento.
+                    </div>
+                </div>
+                <div class="col-6 text-right align-self-center">
+                    <img src="images/icons/4.png" alt="4" width="500" height="500">
                 </div>
             </div>
         </div>
-    </body>
-</html>
+
+    </div>
+
+@endsection

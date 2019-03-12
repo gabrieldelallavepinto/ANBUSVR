@@ -1,0 +1,85 @@
+
+$color-navbar: #4c2f94;
+$colorPrincipal: #b57ef5;
+$colorText: #5f5f5f;
+
+body{
+    color: rgba($colorText,1);
+    background-color: rgba(#f4f4f4,1);
+
+    .navbar{
+        background-color: rgba($color-navbar,1);
+        color:white;
+
+        .navbar-brand{
+            color:white;
+        }
+
+        a{
+            color:white;
+        }
+
+    }
+
+    .dropdown-menu .dropdown-item{
+        color:$colorText;
+        &:hover{
+            background-color: rgba($purple,0.3);
+        }
+    }
+
+    .color-purple{
+        .text-color{
+            color: rgba($purple,1);
+        }
+    }
+
+    a{
+        color: $colorText;
+        &:hover{
+            color: rgba($colorPrincipal,1);
+        }
+    }
+
+}
+
+
+.form-control{
+    &:focus{
+        border-color: $colorPrincipal;
+        -webkit-box-shadow: 0 0 0 0.2rem rgba($colorPrincipal, 0.25);
+        box-shadow: 0 0 0 0.2rem rgba($colorPrincipal, 0.25);
+    }
+}
+
+.btn.btn-primary{
+    color: $colorText;
+    background-color: white;
+    border-color: $colorPrincipal;
+    &:hover, &:active{
+        color: white;
+        background-color: rgba($colorPrincipal,1);
+        border-color: $colorPrincipal;
+    }
+    &:not(:disabled):not(.disabled):active, &:focus{
+        -webkit-box-shadow: 0 0 0 0.2rem rgba($colorPrincipal, 0.5);
+        box-shadow: 0 0 0 0.2rem rgba($colorPrincipal, 0.5);
+        color: $colorText;
+        background-color: white;
+        border-color: $colorPrincipal;
+    }
+}
+
+.btn-link{
+    color: $colorPrincipal;
+    &:hover{
+        color: $colorPrincipal;
+    }
+}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before{
+    background-color: $colorPrincipal;
+    border-color: #b57ef5;
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(181, 126, 245, 0.25);
+    box-shadow: 0 0 0 0.2rem rgba(181, 126, 245, 0.25);
+}
