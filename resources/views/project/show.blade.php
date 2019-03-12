@@ -16,6 +16,10 @@
                                 <h4>Total de objetos: {{$project->items->count()}}</h4>
                             @endif
                         </div>
+                        <div class="col-auto">
+                            {{-- exportaciones --}}
+                            <a href="{{ route('gaze.export',['project_id' => $project->id]) }}" class="d-flex justify-content-end"><i class="material-icons" data-toggle="tooltip" data-placement="top" title="Crear proyecto" style="font-size: 40px;">add_circle</i></a>
+                        </div>
                     </div>
 
                     @if($project->items->count())
@@ -27,46 +31,39 @@
                                     <tr>
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Nº de observaciones</th>
-                                        <th scope="col">Tiempo medio observaciones</th>
-                                        <th scope="col">Tiempo maximo observaciones</th>
+                                        <th scope="col">duración maxima observaciones</th>
+                                        <th scope="col">duración mínima observaciones</th>
+                                        <th scope="col">duración media observaciones</th>
                                         <th scope="col">Nº de agarres</th>
-                                        <th scope="col">Tiempo medio agarres</th>
-                                        <th scope="col">Tiempo maximo agarres</th>
+                                        <th scope="col">duración maxima agarres</th>
+                                        <th scope="col">duración mínima agarres</th>
+                                        <th scope="col">duración media agarres</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($project->items as $item)
                                         @php
-                                            $tiempoMedioObservacion = 0;
-                                            $tiempoMaximoObservacion = 0;
-                                            if($item->gazes->count()){
-                                                foreach($item->gazes as $gaze){
-                                                    $duracion = $gaze->timeEnd - $gaze->timeStart;
-                                                    $tiempoMedioObservacion += $duracion;
-                                                    $tiempoMaximoObservacion = max($tiempoMaximoObservacion, $duracion);
-                                                }
-                                                $tiempoMedioObservacion /= $item->gazes->count();
+                                            $duracionGazes = [];
+                                            foreach($item->gazes as $gaze){
+                                                $duracionGazes[] = $gaze->timeEnd - $gaze->timeStart;
                                             }
 
-                                            $tiempoMedioAgarre = 0;
-                                            $tiempoMaximoAgarre = 0;
-                                            if($item->grabbs->count()){
-                                                foreach($item->grabbs as $grab){
-                                                    $duracion = $grab->timeEnd - $grab->timeStart;
-                                                    $tiempoMedioAgarre += $duracion;
-                                                    $tiempoMaximoAgarre = max($tiempoMaximoAgarre, $duracion);
-                                                }
-                                                $tiempoMedioAgarre /= $item->grabbs->count();
+                                            $duracionGrabbs = [];
+                                            foreach($item->grabbs as $grab){
+                                                $duracionGrabbs[] = $grab->timeEnd - $grab->timeStart;
                                             }
+
                                         @endphp
                                         <tr>
-                                            <td>{{$item->name}}</td>
-                                            <td>{{$item->gazes->count()}}</td>
-                                            <td>{{$tiempoMedioObservacion}}</td>
-                                            <td>{{$tiempoMaximoObservacion}}</td>
-                                            <td>{{$item->grabbs->count()}}</td>
-                                            <td>{{$tiempoMedioAgarre}}</td>
-                                            <td>{{$tiempoMaximoAgarre}}</td>
+                                            <td>{{ $item->name }}</td>
+                                            <td>{{ $item->gazes->count() }}</td>
+                                            <td>{{ $item->gazes->count() > 0 ? max($duracionGazes):0 }}</td>
+                                            <td>{{ $item->gazes->count() > 0 ? min($duracionGazes):0 }}</td>
+                                            <td>{{ $item->gazes->count() > 0 ? array_sum($duracionGazes)/$item->gazes->count():0}}</td>
+                                            <td>{{ $item->grabbs->count() }}</td>
+                                            <td>{{ $item->grabbs->count() > 0 ? max($duracionGrabbs):0 }}</td>
+                                            <td>{{ $item->grabbs->count() > 0 ? min($duracionGrabbs):0 }}</td>
+                                            <td>{{ $item->grabbs->count() > 0 ? array_sum($duracionGrabbs)/$item->grabbs->count():0}}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -84,7 +81,7 @@
 
         <div class="row">
             {{-- numero de observaciones --}}
-            <div class="col-md-4 py-2">
+            <div class="col-md-6 py-2">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Numero de observaciones</h5>
@@ -94,11 +91,31 @@
             </div>
 
             {{-- numero de agarres --}}
-            <div class="col-md-4 py-2">
+            <div class="col-md-6 py-2">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Numero de agarres</h5>
                         <canvas id="chart2"></canvas>
+                    </div>
+                </div>
+            </div>
+
+             {{-- Duración Observaciones --}}
+             <div class="col-md-6 py-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Duración de observaciones</h5>
+                        <canvas id="chart3"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Duración de agarres --}}
+            <div class="col-md-6 py-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Duración de agarres</h5>
+                        <canvas id="chart4"></canvas>
                     </div>
                 </div>
             </div>
@@ -136,12 +153,12 @@
         //estructura de datos
         var labels = [];
         var backgroundColor = [];
-        var options = [];
 
         items.forEach(item => {
             labels.push(item['name']);
             backgroundColor.push('rgba('+Object.values(colorRand())+',0.7)');
         });
+
 
         // chart1
         var data1 = [];
@@ -159,7 +176,7 @@
                     backgroundColor: backgroundColor,
                 }],
             },
-            options: options
+            options: {},
         });
 
 
@@ -179,7 +196,157 @@
                     backgroundColor: backgroundColor,
                 }],
             },
-            options: options
+            options: {},
+        });
+
+        // chart3
+        var durationsMax = [];
+        var durationsMin = [];
+        var durationsMed = [];
+
+        //tiempo medio
+        items.forEach(item => {
+            var durations = [];
+
+
+            item['gazes'].forEach(gaze => {
+                var duration = gaze['timeEnd'] - gaze['timeStart'];
+                durations.push(duration);
+            });
+
+            durationsMax.push(Math.max.apply(null,durations));
+            durationsMin.push(Math.min.apply(null,durations));
+
+            if(item['gazes'].length > 0){
+                durationMed = 0;
+                durations.forEach(duration => {
+                    durationMed += duration;
+                });
+                durationsMed.push(durationMed/item['gazes'].length);
+            }else{
+                durationsMed.push(0);
+            }
+
+        });
+
+
+        var ctx = document.getElementById('chart3').getContext('2d');
+        var chart3 = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Duración máxima',
+                        backgroundColor: 'rgba(191,63,63,0.5)',
+                        data: durationsMax,
+                        type: 'line',
+                        fill: false,
+                        showLine: false,
+                        pointRadius: 8,
+                        pointHoverRadius: 8,
+
+                    },
+                    {
+                        label: 'Duración mínima',
+                        backgroundColor: 'rgba(63,191,191,0.5)',
+                        data: durationsMin,
+                        type: 'line',
+                        fill: false,
+                        showLine: false,
+                        pointRadius: 8,
+                        pointHoverRadius: 8,
+
+                    },
+                    {
+                        label: 'Duración media',
+                        backgroundColor: 'rgba(127,63,191,0.5)',
+                        data: durationsMed,
+
+                    }
+                ],
+            },
+            options: {
+					tooltips: {
+						mode: 'index',
+						intersect: false
+					}
+				}
+        });
+
+        // chart4
+        var durationsMax = [];
+        var durationsMin = [];
+        var durationsMed = [];
+
+        //tiempo medio
+        items.forEach(item => {
+            var durations = [];
+
+
+            item['grabbs'].forEach(gaze => {
+                var duration = gaze['timeEnd'] - gaze['timeStart'];
+                durations.push(duration);
+            });
+
+            durationsMax.push(Math.max.apply(null,durations));
+            durationsMin.push(Math.min.apply(null,durations));
+
+            if(item['grabbs'].length > 0){
+                durationMed = 0;
+                durations.forEach(duration => {
+                    durationMed += duration;
+                });
+                durationsMed.push(durationMed/item['grabbs'].length);
+            }else{
+                durationsMed.push(0);
+            }
+
+        });
+
+
+        var ctx = document.getElementById('chart4').getContext('2d');
+        var chart4 = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Duración máxima',
+                        backgroundColor: 'rgba(191,63,63,0.5)',
+                        data: durationsMax,
+                        type: 'line',
+                        fill: false,
+                        showLine: false,
+                        pointRadius: 8,
+                        pointHoverRadius: 8,
+
+                    },
+                    {
+                        label: 'Duración mínima',
+                        backgroundColor: 'rgba(63,191,191,0.5)',
+                        data: durationsMin,
+                        type: 'line',
+                        fill: false,
+                        showLine: false,
+                        pointRadius: 8,
+                        pointHoverRadius: 8,
+
+                    },
+                    {
+                        label: 'Duración media',
+                        backgroundColor: 'rgba(127,63,191,0.5)',
+                        data: durationsMed,
+
+                    }
+                ],
+            },
+            options: {
+					tooltips: {
+						mode: 'index',
+						intersect: false
+					}
+				}
         });
 
     </script>

@@ -20,3 +20,5 @@ Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');
 
 Route::Resource('project', 'ProjectController');
+
+Route::get('/gaze/export', 'GazeController@export')->name('gaze.export');

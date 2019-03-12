@@ -9,7 +9,7 @@ class Project extends Model
     protected $table = 'projects';
 
     protected $fillable = [
-        'user_id','name',
+        'user_id','name', 'token_key'
     ];
 
     public function items()

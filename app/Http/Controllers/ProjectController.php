@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Validator;
 
 //Models
@@ -61,6 +62,9 @@ class ProjectController extends Controller
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
+
+        //generamos el token key
+        $request['token_key'] = Str::random(60);
 
         $newProject = new Project($request->all());
         $newProject->save();

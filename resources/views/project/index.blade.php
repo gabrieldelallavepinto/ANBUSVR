@@ -29,7 +29,7 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Nombre</th>
-                                        <th scope="col">API ID</th>
+                                        <th scope="col">token key</th>
                                         <th scope="col">Numero de Participantes</th>
                                         <th scope="col">Numero de Objetos</th>
                                         <th scope="col"></th>
@@ -39,7 +39,7 @@
                                     @foreach($projects as $project)
                                     <tr>
                                         <td>{{$project->name}}</td>
-                                        <td>{{$project->id}}</td>
+                                        <td>{{$project->token_key}}</td>
                                         <td>{{$project->participants()->count()}}</td>
                                         <td>{{$project->items()->count()}}</td>
                                         <td>
