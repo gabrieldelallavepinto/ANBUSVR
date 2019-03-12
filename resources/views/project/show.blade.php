@@ -11,14 +11,15 @@
                         <div class="col-auto">
                             <h1>Proyecto {{ $project->name }}</h1>
                             @if(!$project->items->count())
-                                <h4>Ningún objetos encontrado</h4>
+                                <h4>Ningún objeto encontrado</h4>
                             @else
                                 <h4>Total de objetos: {{$project->items->count()}}</h4>
                             @endif
                         </div>
                         <div class="col-auto">
                             {{-- exportaciones --}}
-                            <a href="{{ route('gaze.export',['project_id' => $project->id]) }}" class="d-flex justify-content-end"><i class="material-icons" data-toggle="tooltip" data-placement="top" title="Crear proyecto" style="font-size: 40px;">add_circle</i></a>
+                            <a href="{{ route('gaze.export',['project_id' => $project->id]) }}" class="justify-content-end"><i class="material-icons" data-toggle="tooltip" data-placement="top" title="Exportar Observaciones" style="font-size: 40px;">remove_red_eye</i></a>
+                            <a href="{{ route('grab.export',['project_id' => $project->id]) }}" class="justify-content-end"><i class="material-icons" data-toggle="tooltip" data-placement="top" title="Exportar agarres" style="font-size: 40px;">touch_app</i></a>
                         </div>
                     </div>
 

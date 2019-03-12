@@ -4,31 +4,31 @@ namespace App\Exports;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
-use App\Gaze;
+use App\Grab;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithMapping;
 
-class GazeExport implements FromCollection, WithHeadings, WithMapping
+class GrabExport implements FromCollection, WithHeadings, WithMapping
 {
     public function __construct(Request $request)
     {
         $this->project_id = $request['project_id'];
     }
 
-    public function map($gaze): array
+    public function map($grab): array
     {
         return [
-            $gaze->project->name,
+            $grab->project->name,
             date("Y-m-d H:i:s"),
-            $gaze->participant->name,
-            $gaze->participant->age,
-            $gaze->participant->gender,
-            $gaze->item->name,
-            $gaze->number,
-            $gaze->timeStart,
-            $gaze->timeEnd,
+            $grab->participant->name,
+            $grab->participant->age,
+            $grab->participant->gender,
+            $grab->item->name,
+            $grab->number,
+            $grab->timeStart,
+            $grab->timeEnd,
         ];
     }
 
@@ -52,7 +52,7 @@ class GazeExport implements FromCollection, WithHeadings, WithMapping
     */
     public function collection()
     {
-        return Gaze::where('project_id', $this->project_id)->get();
+        return Grab::where('project_id', $this->project_id)->get();
     }
 
 }

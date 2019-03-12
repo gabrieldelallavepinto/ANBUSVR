@@ -22,3 +22,4 @@ Auth::routes();
 Route::Resource('project', 'ProjectController');
 
 Route::get('/gaze/export', 'GazeController@export')->name('gaze.export');
+Route::get('/grab/export', 'GrabController@export')->name('grab.export');

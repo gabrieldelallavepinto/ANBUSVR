@@ -10,7 +10,7 @@ class Gaze extends Model
     protected $table = 'gazes';
 
     protected $fillable = [
-        'project_id','participant_id','item_id','scene_id','sequence', 'timeStart', 'timeEnd'
+        'project_id', 'participant_id', 'item_id', 'sequence', 'timeStart', 'timeEnd'
     ];
 
     public function project()

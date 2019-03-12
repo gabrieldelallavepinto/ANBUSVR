@@ -9,7 +9,7 @@ class Grab extends Model
     protected $table = 'grabbs';
 
     protected $fillable = [
-        'project_id','participant_id','item_id','scene_id','sequence', 'timeStart', 'timeEnd'
+        'project_id','participant_id','item_id','sequence', 'timeStart', 'timeEnd'
     ];
 
     public function project()
