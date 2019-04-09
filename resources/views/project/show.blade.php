@@ -9,7 +9,7 @@
 
                     <div class="row justify-content-between align-items-center">
                         <div class="col-auto">
-                            <h1>Proyecto {{ $project->name }}</h1>
+                            <h1>{{ $project->name }}</h1>
                             @if(!$project->items->count())
                                 <h4>Ningún objeto encontrado</h4>
                             @else
@@ -19,7 +19,7 @@
                         <div class="col-auto">
                             {{-- exportaciones --}}
                             <a href="{{ route('gaze.export',['project_id' => $project->id]) }}" class="justify-content-end"><i class="material-icons" data-toggle="tooltip" data-placement="top" title="Exportar Observaciones" style="font-size: 40px;">remove_red_eye</i></a>
-                            <a href="{{ route('grab.export',['project_id' => $project->id]) }}" class="justify-content-end"><i class="material-icons" data-toggle="tooltip" data-placement="top" title="Exportar agarres" style="font-size: 40px;">touch_app</i></a>
+                            <a href="{{ route('grab.export',['project_id' => $project->id]) }}" class="justify-content-end"><i class="material-icons" data-toggle="tooltip" data-placement="top" title="Exportar agarres" style="font-size: 40px;">pan_tool</i></a>
                         </div>
                     </div>
 
