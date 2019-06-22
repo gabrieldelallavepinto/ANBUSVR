@@ -22,9 +22,9 @@ class GrabExport implements FromCollection, WithHeadings, WithMapping
         return [
             $grab->project->name,
             date("Y-m-d H:i:s"),
-            $grab->participant->name,
-            $grab->participant->age,
-            $grab->participant->gender,
+            $grab->participant ? $grab->participant->name : "",
+            $grab->participant ? $grab->participant->age : "",
+            $grab->participant ? $grab->participant->gender : "",
             $grab->item->name,
             $grab->number,
             $grab->timeStart,

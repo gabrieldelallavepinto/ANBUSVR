@@ -35,33 +35,35 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::get('/project/{token}', function (Request $request, $token) {
-    return new ProjectResource(Project::where('token_key', $token)->first());
+Route::get('/project/{token}', function ($token, Request $request) {
+    $project = Project::where('token_key', $token)->first();
+    return $project;
 });
 
 Route::get('/item', function (Request $request) {
-    return new ItemResource(Item::where('project_id', $request->project_id)->where('name', $request->name)->first());
+    $item = Item::where('project_id', $request->project_id)->where('name', $request->name)->first();
+    return $item;
 });
 
 Route::post('/item', function (Request $request) {
     $item = Item::firstOrCreate( ['project_id' => $request['project_id'], 'name' => $request['name']], $request->all() );
-    return new ItemResource($item);
+    return $item;
 });
 
 Route::post('/participant', function (Request $request) {
     $participant = new Participant( $request->all() );
     $participant->save();
-    return new ParticipantResource($participant);
+    return $participant;
 });
 
 Route::post('/gaze', function (Request $request) {
     $gaze = new Gaze( $request->all() );
     $gaze->save();
-    return new GazeResource($gaze);
+    return $gaze;
 });
 
 Route::post('/grab', function (Request $request) {
     $grab = new Grab( $request->all() );
     $grab->save();
-    return new GrabResource($grab);
+    return $grab;
 });

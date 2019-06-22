@@ -16,8 +16,8 @@ class CreateGrabbsTable extends Migration
         Schema::create('grabbs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('project_id');
-            $table->unsignedBigInteger('participant_id');
             $table->unsignedBigInteger('item_id');
+            $table->unsignedBigInteger('participant_id')->nullable();
             $table->integer('sequence');
             $table->double('timeStart');
             $table->double('timeEnd');

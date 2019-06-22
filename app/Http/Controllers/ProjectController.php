@@ -115,6 +115,12 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
+        $project = Project::find($id);
+
+        if($project->gazes->count() || $project->grabbs->count()){
+
+        }
+
         Project::destroy($id);
         return redirect()->route('project.index');
     }

@@ -22,9 +22,9 @@ class GazeExport implements FromCollection, WithHeadings, WithMapping
         return [
             $gaze->project->name,
             date("Y-m-d H:i:s"),
-            $gaze->participant->name,
-            $gaze->participant->age,
-            $gaze->participant->gender,
+            $gaze->participant ? $gaze->participant->name : "",
+            $gaze->participant ? $gaze->participant->age : "",
+            $gaze->participant ? $gaze->participant->gender : "",
             $gaze->item->name,
             $gaze->number,
             $gaze->timeStart,
