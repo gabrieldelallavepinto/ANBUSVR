@@ -1,7 +1,7 @@
 <nav id="navbar" class="navbar">
     <a class="navbar-brand" href="{{ route('welcome') }}">
-        <img src="/images/logo/logo.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-        AnalyticsVR
+        <img src="images/logo/logo.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+        ANBUSVR
     </a>
 
     {{-- Navbar izquierda --}}
