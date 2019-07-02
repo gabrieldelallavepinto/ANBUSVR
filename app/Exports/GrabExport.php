@@ -26,7 +26,7 @@ class GrabExport implements FromCollection, WithHeadings, WithMapping
             $grab->participant ? $grab->participant->age : "",
             $grab->participant ? $grab->participant->gender : "",
             $grab->item->name,
-            $grab->number,
+            $grab->sequence,
             $grab->timeStart,
             $grab->timeEnd,
         ];

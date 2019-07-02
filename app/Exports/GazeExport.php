@@ -26,7 +26,7 @@ class GazeExport implements FromCollection, WithHeadings, WithMapping
             $gaze->participant ? $gaze->participant->age : "",
             $gaze->participant ? $gaze->participant->gender : "",
             $gaze->item->name,
-            $gaze->number,
+            $gaze->sequence,
             $gaze->timeStart,
             $gaze->timeEnd,
         ];
