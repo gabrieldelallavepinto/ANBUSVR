@@ -23,9 +23,9 @@ class CreateGazesTable extends Migration
             $table->double('timeEnd');
             $table->timestamps();
 
-            $table->foreign('project_id')->references('id')->on('projects');
-            $table->foreign('participant_id')->references('id')->on('participants');
-            $table->foreign('item_id')->references('id')->on('items');
+            // $table->foreign('project_id')->references('id')->on('projects');
+            // $table->foreign('participant_id')->references('id')->on('participants');
+            // $table->foreign('item_id')->references('id')->on('items');
         });
     }
 

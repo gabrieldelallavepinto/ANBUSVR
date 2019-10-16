@@ -15,9 +15,9 @@ class ApiToken extends Migration
     {
         Schema::table('projects', function ($table) {
             $table->string('token_key', 80)->after('name')
-                                ->unique()
-                                ->nullable()
-                                ->default(null);
+                ->unique()
+                ->nullable()
+                ->default(null);
         });
     }
 
@@ -28,6 +28,7 @@ class ApiToken extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('projects');
+
     }
 }

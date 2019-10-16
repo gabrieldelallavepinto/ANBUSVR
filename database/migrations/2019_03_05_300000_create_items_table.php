@@ -19,7 +19,7 @@ class CreateItemsTable extends Migration
             $table->string('name');
             $table->timestamps();
 
-            $table->foreign('project_id')->references('id')->on('projects');
+            // $table->foreign('project_id')->references('id')->on('projects');
         });
     }
 
