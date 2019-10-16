@@ -9,7 +9,7 @@
 
                 <div class="col-md-8">
                     <div class="home-content">
-                        <img src="images/logo/logo.svg" width="100" height="100" class="d-inline-block align-top" alt="">
+                        <img src="/images/logo/logo.svg" width="100" height="100" class="d-inline-block align-top" alt="">
                         <h1 class="white-text">ANBUSVR</h1>
                         <p class="white-text">ANALÍTICA PARA EMPRESAS A TRAVÉS DE LA REALIDAD VIRTUAL</p>
 
